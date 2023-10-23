@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Navbar = () => {
 
+  const {user,logOut} = useContext(AuthContext)
+
     const navLink =<>
     <NavLink to="/" className="mr-3 text-xl">Home</NavLink>
-    <NavLink to="/" className="mr-3 text-xl">About</NavLink>
-    <NavLink to="/" className="mr-3 text-xl">Service</NavLink>
-    <NavLink to="/" className="mr-3 text-xl">Blog</NavLink>
-    <NavLink to="/" className="mr-3 text-xl">Contact</NavLink>
+    <NavLink to="/about" className="mr-3 text-xl">About</NavLink>
+    <NavLink to="/service" className="mr-3 text-xl">Service</NavLink>
+    <NavLink to="/blog" className="mr-3 text-xl">Blog</NavLink>
+    <NavLink to="/contact" className="mr-3 text-xl">Contact</NavLink>
     </>
 
     return (
@@ -33,11 +36,42 @@ const Navbar = () => {
     {navLink}
     </ul>
   </div>
+ 
+ 
+
   <div className="navbar-end">
+  {
+  user?.email ? (
+    <div className='flex justify-center items-center'>
+        <div className="avatar-group -space-x-6">
+      <div className="avatar">
+        <div className="w-12">
+          <img src={user.photoURL} alt={user.displayName} />
+
+        </div>
+       
+      </div>
+    </div>
+
+    <button onClick={logOut} className='btn btn-outline btn-error'>Logout</button>
+    </div>
+  
+  ) : (
+    <button className='btn btn-outline btn-error'> <Link to="/login">Login</Link></button>
+  )
+}
+
+ 
+
+  <div>
+
     <button className="btn btn-outline btn-error">Appointment</button>
   </div>
-</div>
+ 
 
+
+        </div>
+        </div>
         </div>
     );
 };
