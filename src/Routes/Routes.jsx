@@ -6,6 +6,8 @@ import Register from "../Layout/Authentication/Register";
 import ServiceCard from "../pages/home/ServiceCard";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Blog from "../pages/home/Blog";
+import SingleService from "../pages/SingleService/SingleService";
+import CheckOut from "../pages/SingleService/CheckOut";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +32,16 @@ const router = createBrowserRouter([
           element: <PrivateRoute>
             <Blog></Blog>
           </PrivateRoute>
+        },
+        {
+          path: '/serviceDetails/:id',
+          element: <SingleService></SingleService>,
+          loader: ({params}) => fetch(`http://localhost:5000/service/${params.id}`)
+        },
+        {
+          path: '/checkout/:id',
+          element: <CheckOut></CheckOut>,
+          loader: ({params}) => fetch(`http://localhost:5000/service/${params.id}`)
         }
       ]
     },
