@@ -13,6 +13,7 @@ const Navbar = () => {
     <NavLink to="/service" className="mr-3 text-xl">Service</NavLink>
     <NavLink to="/blog" className="mr-3 text-xl">Blog</NavLink>
     <NavLink to="/contact" className="mr-3 text-xl">Contact</NavLink>
+    <NavLink to="/booking" className="mr-3 text-xl">My cart</NavLink>
     </>
 
     return (
