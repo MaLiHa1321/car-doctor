@@ -1,13 +1,15 @@
 
 import img from '../../assets/images/login/login.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
     const {loginUser} = useContext(AuthContext);
+    const location = useLocation();
     const navigate = useNavigate()
+ 
     const handleLogin = e =>{
         e.preventDefault();
         const form = e.target;
@@ -17,7 +19,7 @@ const Login = () => {
        loginUser(email,password)
        .then(res =>{
         console.log(res.user)
-        navigate('/')
+        navigate(location?.state ? location?.state : '/')
        })
        .catch(err =>{
         console.log(err)

@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const SocialLogin = () => {
     const {googleUser} = useContext(AuthContext)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation()
     const handleGoogle = (media) =>{
         media()
         .then(res =>{
             console.log(res.user)
-            navigate('/')
+            navigate(location?.state ? location?.state : '/')
     
         })
         .catch(err => {
